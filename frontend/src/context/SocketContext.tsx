@@ -29,7 +29,7 @@ export const useSocketContext = (): ISocketContext => {
 const socketURL =
   import.meta.env.MODE === "development"
     ? "http://localhost:3000"
-    : import.meta.env.VITE_BACKEND_URL;
+    : "https://react-ts-express-postgresql-chat-app.onrender.com";
 
 const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   const socketRef = useRef<Socket | null>(null);
