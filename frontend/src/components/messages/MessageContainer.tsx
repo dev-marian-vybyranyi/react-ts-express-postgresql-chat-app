@@ -1,12 +1,13 @@
+import { useAuthContext } from "../../context/AuthContext";
+import useConversation from "../../zustand/useConversation";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 
 import { MessageCircle } from "lucide-react";
-import { useAuthContext } from "../../context/AuthContext";
-import useConversation from "../../zustand/useConversation";
 
 const MessageContainer = () => {
   const { selectedConversation } = useConversation();
+
   return (
     <div className="w-full flex flex-col">
       {!selectedConversation ? (
@@ -16,7 +17,9 @@ const MessageContainer = () => {
           {/* Header */}
           <div className="bg-slate-500 px-4 py-2 mb-2">
             <span className="label-text">To:</span>{" "}
-            <span className="text-gray-900 font-bold">John doe</span>
+            <span className="text-gray-900 font-bold">
+              {selectedConversation.fullName}
+            </span>
           </div>
 
           <Messages />
