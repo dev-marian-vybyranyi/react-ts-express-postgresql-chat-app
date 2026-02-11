@@ -55,3 +55,34 @@ export const sendMessage = async (req: Request, res: Response) => {
   }
 };
 
+export const getMessages = async (req: Request, res: Response) => {
+  try {
+    const { id: userToChatId } = req.params as { id: string };
+    const senderId = req.user.id;
+
+    const conversation = await prisma.conversation.findFirst({
+      where: {
+        participantIds: {
+          hasEvery: [senderId, userToChatId],
+        },
+      },
+      include: {
+        messages: {
+          orderBy: {
+            createdAt: "asc",
+          },
+        },
+      },
+    });
+
+    if (!conversation) {
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json(conversation.messages);
+  } catch (error: any) {
+    console.error("Error in getMessages: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
