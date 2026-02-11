@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx src/index.ts"
+    "dev": "npx tsx src/index.ts",
+    "build": "tsc && npm install && prisma generate --schema=./prisma/schema.prisma",
+    "start": "node dist/src/index.js"
   },
   "keywords": [],
   "author": "",
