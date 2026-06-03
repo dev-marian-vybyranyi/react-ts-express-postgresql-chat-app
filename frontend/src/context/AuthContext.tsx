@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { Dispatch, ReactNode, SetStateAction } from "react";
-import toast from "react-hot-toast";
 
 type AuthUserType = {
   id: string;
